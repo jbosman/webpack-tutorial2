@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const VENDOR_LIBS = [
   "faker",
@@ -39,6 +40,9 @@ module.exports = {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({ // If there are any modules that are duplicates between our entry outputs
       name: 'vendor' // Only put them in the vendor file
+    }),
+    new HtmlWebpackPlugin({ // This plugin allows you to use a template html file and will append script tags
+      template: 'src/index.html' // to the end of the body for each output bundle
     })
   ]	
 };
