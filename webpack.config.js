@@ -22,7 +22,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].js' // Dynmaically save the file with the entry name (i.e. bundle or vendor)
+    filename: '[name].[chunkhash].js' // Dynmaically save the file with the entry name (i.e. bundle or vendor)
   },
   module: {
   	rules: [
@@ -39,7 +39,7 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({ // If there are any modules that are duplicates between our entry outputs
-      name: 'vendor' // Only put them in the vendor file
+      names: ['vendor', 'manifest'] // Only put them in the vendor file. Manifest is here to check if the vendor file changed
     }),
     new HtmlWebpackPlugin({ // This plugin allows you to use a template html file and will append script tags
       template: 'src/index.html' // to the end of the body for each output bundle
